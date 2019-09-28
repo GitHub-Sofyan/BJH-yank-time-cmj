@@ -1,0 +1,75 @@
+---
+title: "Comparison of starts with Jerk"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(e1071)  
+library(gridExtra)
+library(Simpsons)
+library(GGally)
+library(memisc)
+library(pander)
+library(corrplot)
+library(outliers)
+library(pheatmap)
+library(reshape2)
+library(corrplot)
+library(rquery)
+library(Hmisc)
+library(mvnormtest)
+library(blandr)
+library(BlandAltmanLeh)
+```
+
+```{r}
+signal <- read.csv('D:/OneDrive - Sofyan Sahrom/R Notebooks/COM.csv', header = TRUE) # Loading the csv file
+head(signal)
+str(signal)
+M1 <- signal$Method.1
+Motion <- signal$Motion
+```
+
+```{r}
+t.test(M1,Motion,paired=TRUE)
+blandr.statistics(M1, Motion, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(M1, Motion, plotTitle = "Bland Altman plot for comparing Method 1 versus 3D Motion Analysis")
+```
+
+```{r}
+starts <- read.csv('D:/OneDrive - Sofyan Sahrom/R Notebooks/starts.csv', header = TRUE) # Loading the csv file
+head(starts)
+str(starts)
+dknee <- starts$Dknee
+dCoM <- starts$DCoM
+dGRFz <- starts$DGRFz
+jGRFz <- starts$JGRF
+jknee <- starts$Jknee
+jCoM <- starts$JCoM
+hCoM <- starts$hCoM
+```
+
+```{r}
+t.test(dknee,jknee,paired=TRUE)
+blandr.statistics(dknee,jknee, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(dknee,jknee, plotTitle = "Bland Altman plot for comparing Yank method against Motion Analysis to detect knee flexion")
+```
+```{r}
+t.test(dCoM,hCoM,paired=TRUE)
+blandr.statistics(dCoM,hCoM, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(dCoM,hCoM, plotTitle = "Bland Altman plot for comparing velocity method against Motion Analysis to detect CoM")
+```
+
+```{r}
+t.test(dCoM,jCoM,paired=TRUE)
+blandr.statistics(dCoM,jCoM, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(dCoM,jCoM, plotTitle = "Bland Altman plot for comparing Yank method against Motion Analysis to detect CoM")
+```
+
+```{r}
+t.test(dGRFz,jGRFz,paired=TRUE)
+blandr.statistics(dGRFz,jGRFz, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(dGRFz,jGRFz, plotTitle = "Bland Altman plot for comparing Yank method against Motion Analysis to detect GRFz Minimum")
+```
