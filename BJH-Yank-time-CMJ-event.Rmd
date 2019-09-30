@@ -1,0 +1,104 @@
+---
+title: "BJH - Comparison of event identification methods with 3D Motion Analysis"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(blandr)
+library(BlandAltmanLeh)
+```
+
+```{r}
+signal <- read.csv('_', header = TRUE) # Loading the csv file
+head(signal)
+str(signal)
+E13D <- signal$E1.3D
+E23D <- signal$E2.3D
+E53D <- signal$E5.3D
+```
+
+```{r}
+# "Event 1 - 3D Motion Analysis vs. Yank"
+t.test(E13D,signal$E1.Y,paired=TRUE)
+blandr.statistics(E13D,signal$E1.Y, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E13D,signal$E1.Y, plotTitle = "Event 1 - 3D Motion Analysis vs. Yank")
+```
+
+```{r}
+# "Event 1 - 3D Motion Analysis vs. BW97.5%"
+t.test(E13D,signal$S97,paired=TRUE)
+blandr.statistics(E13D,signal$S97, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E13D,signal$S97, plotTitle = "Event 1 - 3D Motion Analysis vs. BW97.5%")
+```
+
+```{r}
+# "Event 1 - 3D Motion Analysis vs. BW95%"
+t.test(E13D,signal$S95,paired=TRUE)
+blandr.statistics(E13D,signal$S95, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E13D,signal$S95, plotTitle = "Event 1 - 3D Motion Analysis vs. BW95%")
+```
+
+```{r}
+# "Event 1 - 3D Motion Analysis vs. BW92.5%"
+t.test(E13D,signal$S92,paired=TRUE)
+blandr.statistics(E13D,signal$S92, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E13D,signal$S92, plotTitle = "Event 1 - 3D Motion Analysis vs. BW92.5%")
+```
+
+```{r}
+# "Event 1 - 3D Motion Analysis vs. 2SD"
+t.test(E13D,signal$SSD2,paired=TRUE)
+blandr.statistics(E13D,signal$SSD2, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E13D,signal$SSD2, plotTitle = "Event 1 - 3D Motion Analysis vs. 2SD")
+```
+
+```{r}
+# "Event 1 - 3D Motion Analysis vs. 3SD"
+t.test(E13D,signal$SSD3,paired=TRUE)
+blandr.statistics(E13D,signal$SSD3, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E13D,signal$SSD3, plotTitle = "Event 1 - 3D Motion Analysis vs. 3SD")
+```
+
+```{r}
+# "Event 1 - 3D Motion Analysis vs. 4SD"
+t.test(E13D,signal$SSD4,paired=TRUE)
+blandr.statistics(E13D,signal$SSD4, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E13D,signal$SSD4, plotTitle = "Event 1 - 3D Motion Analysis vs. 4SD")
+```
+
+```{r}
+# "Event 1 - 3D Motion Analysis vs. 5SD"
+t.test(E13D,signal$SSD5,paired=TRUE)
+blandr.statistics(E23D,signal$SSD5, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E23D,signal$SSD5, plotTitle = "Event 1 - 3D Motion Analysis vs. 5SD")
+```
+
+```{r}
+# "Event 2 - 3D Motion Analysis vs. Yank"
+t.test(E23D,signal$E2.Y,paired=TRUE)
+blandr.statistics(E23D,signal$E2.Y, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E23D,signal$E2.Y, plotTitle = "Event 2 - 3D Motion Analysis vs. Yank")
+```
+
+```{r}
+# "Event 2 - 3D Motion Analysis vs. Displacement-time signal"
+t.test(E23D,signal$E2.D,paired=TRUE)
+blandr.statistics(E23D,signal$E2.D, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E53D,signal$E2.D, plotTitle = "Event 2 - 3D Motion Analysis vs. Displacement-time signal")
+```
+
+```{r}
+# "Event 5 - 3D Motion Analysis vs. Yank"
+t.test(E53D,signal$E5.Y,paired=TRUE)
+blandr.statistics(E53D,signal$E5.Y, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E53D,signal$E5.Y, plotTitle = "Event 5 - 3D Motion Analysis vs. Yank")
+```
+
+```{r}
+# "Event 5 - 3D Motion Analysis vs. Velocity"
+t.test(E53D,signal$E5.V,paired=TRUE)
+blandr.statistics(E53D,signal$E5.V, sig.level = 0.95, LoA.mode = 1)
+blandr.draw(E53D,signal$E5.V, plotTitle = "Event 5 - 3D Motion Analysis vs. Velocity")
+```
